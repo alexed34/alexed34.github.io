@@ -2,14 +2,15 @@
 
 ### Описание
 
-Библиотека содержит около 100 книг в жанре научной фантасктики. Формат книг 'txt'.
+Скрипт содержит библиотеку из 100 книг в жанре научной фантасктики. Формат книг 'txt'.
 
-Онлайн версия находится по адресу 
+Онлайн версия находится по адресу [alexed34.github.io](https://alexed34.github.io/pages/index1.html)
 
 Книги взяты из библиотеки [tululu.org](http://tululu.org/)
 
 ### Установка
 
+Должен быть установлен Python 3.
 
 * Создайте виртуальное окружение 
     
@@ -29,15 +30,8 @@
 ### Запуск скрипта
 
 * В консоле перейдите в папку layout-4
-* запустите файл render_website.py `(venv) C:\Users\asus\PycharmProjects\layout-4>render_website.py`
-* Запустится код 
-```
-[I 200601 13:29:58 server:296] Serving on http://127.0.0.1:5500
-[I 200601 13:29:58 handlers:62] Start watching changes
-[I 200601 13:29:58 handlers:64] Start detecting changes
-[W 200601 13:29:59 web:2250] 404 GET / (127.0.0.1) 2.00ms
-```
-* Откройте в браузере ссылку (http://127.0.0.1:8000/pages/index1.html)
+* запустите файл `render_website.py` пример: `(venv) C:\Users\asus\PycharmProjects\layout-4>render_website.py`
+* Откройте в браузере ссылку (http://127.0.0.1:8000/index.html)
 
 ### Цель проекта
 
