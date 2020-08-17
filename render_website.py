@@ -38,8 +38,7 @@ def main():
         books_json = f.read()
 
     books = json.loads(books_json)
-    parts_number = math.ceil(len(books) / 10)
-    parts = list(chunked(books, parts_number))
+    parts = list(chunked(books, 10))
     pages = len(parts)
     os.makedirs('pages', exist_ok=True)
     template = env.get_template('template.html')
