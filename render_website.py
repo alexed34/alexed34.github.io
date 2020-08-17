@@ -1,6 +1,5 @@
 import glob
 import json
-import math
 import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
@@ -8,24 +7,25 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
 
 
-def delete_unnecessary_files(add_pages):
+def delete_unnecessary_files(pages):
     all_pages = glob.glob('pages/index*.html')
     for page in all_pages:
-        page_split = page.split('\\')[-1]
-        if page_split not in add_pages:
+        name_page = page.split('\\')[-1]
+        if name_page not in pages:
             os.remove(page)
 
-def writer_pages(parts, template, pages):
-    add_pages = []
+def writer_pages(parts, template, quantity_pages):
+    pages = []
     for i, part in enumerate(parts, 1):
-        rendered_page = template.render(books=part, pages=pages, index=i)
-        with open(f'pages/index{i}.html', 'w', encoding="utf8") as file:
+        rendered_page = template.render(books=part, pages=quantity_pages, index=i)
+        filename = f'index{i}.html'
+        with open(f'pages/{filename}', 'w', encoding="utf8") as file:
             file.write(rendered_page)
-        add_pages.append(f'index{i}.html')
+        pages.append(filename)
         if i == 1:
             with open(f'index.html', 'w', encoding="utf8") as file:
                 file.write(rendered_page)
-    return add_pages
+    return pages
 
 
 def main():
@@ -39,13 +39,13 @@ def main():
 
     books = json.loads(books_json)
     parts = list(chunked(books, 10))
-    pages = len(parts)
+    quantity_pages = len(parts)
     os.makedirs('pages', exist_ok=True)
     template = env.get_template('template.html')
 
-    add_pages = writer_pages(parts, template, pages)
+    pages = writer_pages(parts, template, quantity_pages)
 
-    delete_unnecessary_files(add_pages)
+    delete_unnecessary_files(pages)
 
     server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
